@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
@@ -17,6 +16,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: _title,
       home: MyStatelessWidget(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -29,11 +29,10 @@ class MyStatelessWidget extends StatefulWidget {
 }
 
 class _MyStatelessWidgetState extends State<MyStatelessWidget> {
-
   int numeroDisplay = 0;
   var display = '';
   var result = '';
-   
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,11 +45,11 @@ class _MyStatelessWidgetState extends State<MyStatelessWidget> {
         child: ListView(
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 50, right: 10),
-              height: 100,
+              padding: const EdgeInsets.only(top: 80, right: 10),
+              height: 200,
               child: Text(
                 display.toString(),
-                style: const TextStyle(fontSize: 30),
+                style: const TextStyle(fontSize: 50),
                 textAlign: TextAlign.right,
               ),
               color: const Color.fromARGB(52, 75, 64, 64),
@@ -62,7 +61,7 @@ class _MyStatelessWidgetState extends State<MyStatelessWidget> {
                 botao('7', numero: 7, color: Colors.black38),
                 botao('8', numero: 8, color: Colors.black38),
                 botao('9', numero: 9, color: Colors.black38),
-                botao('/', color: Colors.black38),
+                botao('÷', color: Colors.black38),
                 botao('C', color: Colors.black)
               ],
             ),
@@ -93,7 +92,7 @@ class _MyStatelessWidgetState extends State<MyStatelessWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 botao('0', numero: 0, color: Colors.black38),
-                botao(',', color: Colors.black38),
+                botao('.', color: Colors.black38),
                 botao('%', color: Colors.black38),
                 botao('+', color: Colors.black38),
                 botao('=', color: Colors.green)
@@ -119,38 +118,40 @@ class _MyStatelessWidgetState extends State<MyStatelessWidget> {
           )),
       onTap: () {
         setState(() {
-            if (numero != null){
-              display += numero.toString();
-            }
-            
-            else if (text == 'C'){
-              setState(() {
-                display = '';
-              });
-            }
-            else if (text == '+' || text == 'x' || text == '-' || text == '/' || text == '√' ){
-              setState(() {
-                display += text.toString();
-              });
-            }
-            else if (text == '='){
-              estateResult();
-              setState(() {
-                display = result.toString();
-              });
-            }
-          
+          if (numero != null) {
+            display += numero.toString();
+          } else if (text == 'C') {
+            setState(() {
+              display = '';
+            });
+          } else if (text == '+' ||
+              text == 'x' ||
+              text == '-' ||
+              text == '÷' ||
+              text == '√' ||
+              text == '.') {
+            setState(() {
+              display += text.toString();
+            });
+          } else if (text == '=') {
+            estateResult();
+            setState(() {
+              display = result.toString();
+            });
+          }
         });
       },
     );
   }
 
   void estateResult() {
-    String finaluserinput = display;
-    finaluserinput = display.replaceAll('x', "*");
- 
+    String displayMultiplicacao = display;
+
+    
+    displayMultiplicacao = display.replaceAll('x', "*");    
+  
     Parser p = Parser();
-    Expression exp = p.parse(finaluserinput);
+    Expression exp = p.parse(displayMultiplicacao);
     ContextModel cm = ContextModel();
     double eval = exp.evaluate(EvaluationType.REAL, cm);
     result = eval.toString();
