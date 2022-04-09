@@ -39,18 +39,16 @@ class _MyStatelessWidgetState extends State<MyStatelessWidget> {
           title: const Text('Calculadora'),
           backgroundColor: Colors.black,
         ),
-        body: Column(
+        body: Column( 
           children: [
             Expanded(
-                child: Container(
-              child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                Flexible(
-                    child: Text(
-                  display.toString(),
-                  style: const TextStyle(fontSize: 45),
-                ))
-              ]),
-            )),
+                child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  Flexible(
+                      child: Text(
+                    display.toString(),
+                    style: const TextStyle(fontSize: 70),
+                  ))
+                ])),
             GridView.count(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -60,11 +58,11 @@ class _MyStatelessWidgetState extends State<MyStatelessWidget> {
                 botao("8", numero: 8),
                 botao("9", numero: 9),
                 botao("÷"),
-                botao("C"),
+                botao("C", color: Colors.black),
                 botao("4", numero: 4),
                 botao("5", numero: 5),
                 botao("6", numero: 6),
-                botao("X"),
+                botao("x"),
                 botao("½"),
                 botao("1", numero: 1),
                 botao("2", numero: 2),
