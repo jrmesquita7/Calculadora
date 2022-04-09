@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
 
@@ -36,72 +35,51 @@ class _MyStatelessWidgetState extends State<MyStatelessWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Calculadora'),
-        backgroundColor: Colors.black,
-      ),
-      body: Container(
-        padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-        child: ListView(
-          children: [
-            Container(
-              padding: const EdgeInsets.only(top: 80, right: 10),
-              height: 200,
-              child: Text(
-                display.toString(),
-                style: const TextStyle(fontSize: 50),
-                textAlign: TextAlign.right,
-              ),
-              color: const Color.fromARGB(52, 75, 64, 64),
-            ),
-            const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                botao('7', numero: 7, color: Colors.black38),
-                botao('8', numero: 8, color: Colors.black38),
-                botao('9', numero: 9, color: Colors.black38),
-                botao('÷', color: Colors.black38),
-                botao('C', color: Colors.black)
-              ],
-            ),
-            const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                botao('4', numero: 4, color: Colors.black38),
-                botao('5', numero: 5, color: Colors.black38),
-                botao('6', numero: 6, color: Colors.black38),
-                botao('x', color: Colors.black38),
-                botao('½', color: Colors.black38)
-              ],
-            ),
-            const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                botao('1', numero: 1, color: Colors.black38),
-                botao('2', numero: 2, color: Colors.black38),
-                botao('3', numero: 3, color: Colors.black38),
-                botao('-', color: Colors.black38),
-                botao('√', color: Colors.black38)
-              ],
-            ),
-            const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                botao('0', numero: 0, color: Colors.black38),
-                botao('.', color: Colors.black38),
-                botao('%', color: Colors.black38),
-                botao('+', color: Colors.black38),
-                botao('=', color: Colors.green)
-              ],
-            ),
-          ],
+        appBar: AppBar(
+          title: const Text('Calculadora'),
+          backgroundColor: Colors.black,
         ),
-      ),
-    );
+        body: Column(
+          children: [
+            Expanded(
+                child: Container(
+              child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                Flexible(
+                    child: Text(
+                  display.toString(),
+                  style: const TextStyle(fontSize: 45),
+                ))
+              ]),
+            )),
+            GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 5,
+              children: [
+                botao("7", numero: 7),
+                botao("8", numero: 8),
+                botao("9", numero: 9),
+                botao("÷"),
+                botao("C"),
+                botao("4", numero: 4),
+                botao("5", numero: 5),
+                botao("6", numero: 6),
+                botao("X"),
+                botao("½"),
+                botao("1", numero: 1),
+                botao("2", numero: 2),
+                botao("3", numero: 3),
+                botao("-"),
+                botao("√"),
+                botao("0", numero: 0),
+                botao("."),
+                botao("%"),
+                botao("+"),
+                botao("=", color: Colors.green),
+              ],
+            )
+          ],
+        ));
   }
 
   botao(String text, {int? numero, Color color = Colors.grey}) {
@@ -146,10 +124,7 @@ class _MyStatelessWidgetState extends State<MyStatelessWidget> {
 
   void estateResult() {
     String displayMultiplicacao = display;
-
-    
-    displayMultiplicacao = display.replaceAll('x', "*");    
-  
+    displayMultiplicacao = display.replaceAll('x', "*");
     Parser p = Parser();
     Expression exp = p.parse(displayMultiplicacao);
     ContextModel cm = ContextModel();
