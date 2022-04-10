@@ -51,13 +51,13 @@ class _MyStatelessWidgetState extends State<MyStatelessWidget> {
                 ])),
             GridView.count(
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(), mainAxisSpacing: 1, crossAxisSpacing: 1,
               crossAxisCount: 5,
               children: [
                 botao("7", numero: 7),
                 botao("8", numero: 8),
                 botao("9", numero: 9),
-                botao("÷"),
+                botao("/"),
                 botao("C", color: Colors.black),
                 botao("4", numero: 4),
                 botao("5", numero: 5),
@@ -84,12 +84,12 @@ class _MyStatelessWidgetState extends State<MyStatelessWidget> {
     return GestureDetector(
       child: Container(
           width: 50,
-          height: 50,
+          height: 100,
           color: color,
           child: Center(
             child: Text(
               text,
-              style: const TextStyle(fontSize: 30, color: Colors.white),
+              style: const TextStyle(fontSize: 40, color: Colors.white),
             ),
           )),
       onTap: () {
@@ -103,7 +103,7 @@ class _MyStatelessWidgetState extends State<MyStatelessWidget> {
           } else if (text == '+' ||
               text == 'x' ||
               text == '-' ||
-              text == '÷' ||
+              text == '/' ||
               text == '√' ||
               text == '.') {
             setState(() {
